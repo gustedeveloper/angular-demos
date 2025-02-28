@@ -1,6 +1,6 @@
 <h2>Alta</h2>
 <div>
-  <form>
+  <form #addForm="ngForm">
     <div>
       <label>Id </label>
       <input name="id" [(ngModel)]="newMember.id" required #id="ngModel" />
@@ -29,7 +29,7 @@
       <label>Avatar </label>
       <input name="avatar" type="file" accept="image/*" />
     </div>
-    <button (click)="add()">Añadir</button>
+    <button [disabled]="addForm.invalid" (click)="add()">Añadir</button>
   </form>
 </div>
 
