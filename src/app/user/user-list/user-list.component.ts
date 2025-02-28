@@ -25,6 +25,15 @@ export class UserListComponent {
     console.log(this.members);
   }
 
+  handleFileInput($event: any) {
+    const files = $event.target.files as FileList;
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = () => {
+      this.newMember.avatar_url = reader.result as string;
+    };
+  }
+
   ngOnInit(): void {
     fetch('https://api.github.com/orgs/lemoncode/members')
       .then((response) => response.json())

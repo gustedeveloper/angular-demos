@@ -27,7 +27,13 @@
     </div>
     <div>
       <label>Avatar </label>
-      <input name="avatar" type="file" accept="image/*" />
+      <input
+        name="avatar"
+        (change)="handleFileInput($event)"
+        type="file"
+        accept="image/*"
+      />
+      <div><img [src]="newMember.avatar_url" width="50" height="50" /></div>
     </div>
     <button [disabled]="addForm.invalid" (click)="add()">Añadir</button>
   </form>
