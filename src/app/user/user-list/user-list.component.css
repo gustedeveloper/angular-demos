@@ -27,3 +27,12 @@ img {
 tbody tr:nth-child(odd) {
   background-color: #f9f9f9; /* Fondo alternativo para filas impares */
 }
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 5px solid #42a948;
+}
+
+.ng-invalid:not(form) {
+  border-left: 5px solid #a94442;
+}
