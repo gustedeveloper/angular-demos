@@ -17,7 +17,7 @@ export class SearchComponent {
   @Output() otroEvento = new EventEmitter();
 
   changeName() {
-    this.name = 'Guste';
+    this.name = 'Andrés';
     this.clickEnLupa.emit(this.name);
   }
 }
