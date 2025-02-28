@@ -12,4 +12,8 @@ import { SearchComponent } from './utils/search/search.component';
 })
 export class AppComponent {
   title = 'app-demos';
+
+  escribeLog($event: Event) {
+    console.log($event);
+  }
 }

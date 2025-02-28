@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-search',
@@ -12,4 +12,12 @@ export class SearchComponent {
   @Input() label = 'Buscar:';
 
   name = 'Guste';
+
+  @Output() clickEnLupa: EventEmitter<string> = new EventEmitter();
+  @Output() otroEvento = new EventEmitter();
+
+  changeName() {
+    this.name = 'Guste';
+    this.clickEnLupa.emit(this.name);
+  }
 }
