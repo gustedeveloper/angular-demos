@@ -8,4 +8,6 @@ import { HighlightDirective } from '../directives/highlight.directive';
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css',
 })
-export class MenuComponent {}
+export class MenuComponent {
+  public variableColorEnElTS = 'pink';
+}
