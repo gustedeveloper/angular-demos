@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { MemberEntity } from '../../model/model';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [],
+  imports: [NgFor],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css',
 })
