@@ -2,22 +2,45 @@ import { Component } from '@angular/core';
 import { MemberEntity } from '../../model/model';
 import { NgFor, NgIf } from '@angular/common';
 import { HighlightDirective } from '../../directives/highlight.directive';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { SearchByLoginPipe } from '../../pipes/search-by-login.pipe';
 import { MembersService } from '../../services/members.service';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [NgFor, HighlightDirective, FormsModule, NgIf, SearchByLoginPipe],
+  imports: [
+    NgFor,
+    HighlightDirective,
+    FormsModule,
+    NgIf,
+    SearchByLoginPipe,
+    ReactiveFormsModule,
+  ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css',
 })
 export class UserListComponent {
   members: MemberEntity[] = [];
   newMember!: MemberEntity;
+  memberSelected!: MemberEntity;
 
-  constructor(private membersService: MembersService) {}
+  editForm!: FormGroup;
+  idControl!: FormControl;
+  loginControl!: FormControl;
+  avatarControl!: FormControl;
+
+  constructor(
+    private membersService: MembersService,
+    private fb: FormBuilder
+  ) {}
 
   add(): void {
     this.members.push(this.newMember);
@@ -46,5 +69,24 @@ export class UserListComponent {
       login: '',
       avatar_url: '',
     };
+
+    this.createEditForm();
+  }
+
+  createEditForm(): void {
+    this.editForm = this.fb.group({
+      id: ['', Validators.required],
+      login: ['', [Validators.required, Validators.minLength(6)]],
+      avatar_url: '',
+    });
+
+    this.idControl = this.editForm.get('id') as FormControl;
+    this.loginControl = this.editForm.get('login') as FormControl;
+    this.avatarControl = this.editForm.get('avatar_url') as FormControl;
+  }
+
+  select(member: MemberEntity): void {
+    this.memberSelected = { ...member };
+    this.editForm.patchValue(this.memberSelected);
   }
 }
