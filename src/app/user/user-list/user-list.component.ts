@@ -3,11 +3,12 @@ import { MemberEntity } from '../../model/model';
 import { NgFor, NgIf } from '@angular/common';
 import { HighlightDirective } from '../../directives/highlight.directive';
 import { FormsModule } from '@angular/forms';
+import { SearchByLoginPipe } from '../../pipes/search-by-login.pipe';
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [NgFor, HighlightDirective, FormsModule, NgIf],
+  imports: [NgFor, HighlightDirective, FormsModule, NgIf, SearchByLoginPipe],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.css',
 })
