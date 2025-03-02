@@ -94,9 +94,14 @@
     </div>
     <div>
       <label>Avatar </label>
-      <input name="avatar" type="file" accept="image/*" />
+      <input
+        name="avatar"
+        type="file"
+        (change)="handleEditFileInput($event)"
+        accept="image/*"
+      />
       <div><img [src]="" width="50" /></div>
     </div>
-    <button [disabled]="editForm.invalid">Añadir</button>
+    <button [disabled]="editForm.invalid" (click)="save()">Añadir</button>
   </form>
 </div>

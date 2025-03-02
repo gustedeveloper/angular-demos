@@ -89,4 +89,22 @@ export class UserListComponent {
     this.memberSelected = { ...member };
     this.editForm.patchValue(this.memberSelected);
   }
+
+  handleEditFileInput($event: any): void {
+    const files = $event.target.files as FileList;
+    const reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = () => {
+      this.avatarControl.setValue(reader.result);
+    };
+  }
+
+  save(): void {
+    if (this.editForm.valid) {
+      this.members = [...this.members];
+      const member = this.editForm.value;
+      const index = this.members.findIndex((item) => item.id === member.id);
+      this.members.splice(index, 1, member);
+    }
+  }
 }
