@@ -4,6 +4,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { HighlightDirective } from '../../directives/highlight.directive';
 import { FormsModule } from '@angular/forms';
 import { SearchByLoginPipe } from '../../pipes/search-by-login.pipe';
+import { MembersService } from '../../services/members.service';
 
 @Component({
   selector: 'app-user-list',
@@ -15,6 +16,8 @@ import { SearchByLoginPipe } from '../../pipes/search-by-login.pipe';
 export class UserListComponent {
   members: MemberEntity[] = [];
   newMember!: MemberEntity;
+
+  constructor(private membersService: MembersService) {}
 
   add(): void {
     this.members.push(this.newMember);
@@ -36,9 +39,7 @@ export class UserListComponent {
   }
 
   ngOnInit(): void {
-    fetch('https://api.github.com/orgs/lemoncode/members')
-      .then((response) => response.json())
-      .then((result) => (this.members = result));
+    this.membersService.getAll().then((members) => (this.members = members));
 
     this.newMember = {
       id: '',
