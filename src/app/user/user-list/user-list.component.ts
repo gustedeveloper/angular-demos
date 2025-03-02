@@ -62,7 +62,9 @@ export class UserListComponent {
   }
 
   ngOnInit(): void {
-    this.membersService.getAll().then((members) => (this.members = members));
+    this.membersService
+      .getAll()
+      .subscribe((members) => (this.members = members));
 
     this.newMember = {
       id: '',
